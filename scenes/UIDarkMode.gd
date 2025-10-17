@@ -23,6 +23,8 @@ func _ready():
 	$OptionButton.clear()
 	$OptionButton.add_item("Light", Mode.LIGHT)
 	$OptionButton.add_item("Dark", Mode.DARK)
+	# Hack to fix minimum size being incorrect
+	$OptionButton.get_popup().rect_min_size = $OptionButton.get_minimum_size() * Vector2(2,2.75)
 	
 	var config = Globals.read_config()
 	# adds the darkmode setting if not existing
@@ -42,22 +44,26 @@ func _ready():
 func mode_handler(dark: bool):
 	match dark:
 		true:
-			main_node.set_theme(load("res://theme/dark_mode.theme"))
+			main_node.set_theme(load("res://theme/dark_mode.tres"))
 			# Tweaks the custom override styles that has been set to dark
 			$"%Installed".set("custom_styles/bg", installed_style_dark)
 			$"%LogoContainer/Panel".set("custom_styles/panel", logo_panel_style_dark)
 		false:
-			main_node.set_theme(load("res://theme/main.theme"))
+			main_node.set_theme(load("res://theme/light_mode.tres"))
 			# Tweaks the custom override styles to normal
 			$"%Installed".set("custom_styles/bg", install_style)
 			$"%LogoContainer/Panel".set("custom_styles/panel", logo_panel_style)
+	_update_config(dark)
 
 
 func _update_config(darkmode_selected):
 	Globals.update_ui_flag("darkmode", darkmode_selected)
+	var settings_override : ConfigFile = ConfigFile.new()
+	settings_override.set_value("application", "boot_splash/bg_color", Color( 0.0784314, 0.0784314, 0.0784314, 1 ) if darkmode_selected else Color.white)
+	var save_path : String = ProjectSettings.get_setting("application/config/project_settings_override")
+	settings_override.save(save_path)
 
 
 func _on_OptionButton_item_selected(index):
 	var darkmode_selected = $OptionButton.get_item_id(index) == Mode.DARK
 	mode_handler(darkmode_selected)
-	_update_config(darkmode_selected)
