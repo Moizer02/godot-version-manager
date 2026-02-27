@@ -28,7 +28,7 @@ Unzip and double-click. Extraction of downloaded versions requires `unzip` which
 ## F.A.Q
 **Q: Where are the downloaded binaries saved to?**
 
-A: They are saved to `user://versions` which varies depending on your platform. On windows it's %appdata%/Godot/app_serdata/Godot Version Manager/versions
+A: They are saved to `user://versions` which varies depending on your platform. On windows it's %appdata%/Godot/app_userdata/Godot Version Manager/versions
 
 **Q: How is this different from Hourglass or Godot Manager?**
 
@@ -37,7 +37,8 @@ A:
  - [Godot Manager](https://github.com/eumario/godot-manager) seems to be a pretty mature and featureful alternative too.
  - [Godots](https://github.com/MakovWait/godots) is a new (Aug 2023) alternative that a lot of people seem to like.
  - [GodotEnv](https://github.com/chickensoft-games/GodotEnv) and [godot-version-manager](https://github.com/gaheldev/godot-version-manager) are CLI-only alternatives.
- - [Godot Launcher](https://github.com/sebastianoboem/godot-launcher) is a python-based alternative with support for extension and cache management. 
+ - [Godot Launcher](https://github.com/sebastianoboem/godot-launcher) is a python-based alternative with support for extension and cache management.
+ - [gdvm](https://github.com/adalinesimonian/gdvm) is another CLI based version manager built with Rust.
 
 ## LICENSE
 MIT Licensed (see LICENSE.md)
